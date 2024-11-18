@@ -1,0 +1,36 @@
+includes:
+    - .Build/vendor/symplify/phpstan-rules/config/regex-rules.neon
+
+rules:
+    - Symplify\PHPStanRules\Rules\NoReturnArrayVariableListRule
+
+parameters:
+    phpVersion: 80100
+    level: 8
+    paths:
+        - Classes
+    treatPhpDocTypesAsCertain: false
+    cognitive_complexity:
+        class: 10
+        function: 8
+
+services:
+    -
+        class: Symplify\PHPStanRules\Rules\ForbiddenFuncCallRule
+        tags: [phpstan.rules.rule]
+        arguments:
+            forbiddenFunctions:
+                - eval
+                - dump
+                - die
+                - compact
+                - var_dump
+                - var_export
+    -
+        class: Symplify\PHPStanRules\Rules\ForbiddenNodeRule
+        tags: [phpstan.rules.rule]
+        arguments:
+            forbiddenNodes:
+                - PhpParser\Node\Expr\Empty_
+                - PhpParser\Node\Stmt\Switch_
+                - PhpParser\Node\Expr\ErrorSuppress

@@ -1,0 +1,106 @@
+name: CI
+
+on:
+  push:
+    paths:
+      - 'composer.json'
+      - '.github/workflows/ci.yml'
+      - '**.php'
+  pull_request:
+    paths:
+      - 'composer.json'
+      - '.github/workflows/ci.yml'
+      - '**.php'
+
+jobs:
+  build:
+    name: Build PHP/TYPO3
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - php-versions: '8.1'
+            typo3-versions: '^12'
+          - php-versions: '8.2'
+            typo3-versions: '^12'
+          - php-versions: '8.2'
+            typo3-versions: '^13'
+          - php-versions: '8.3'
+            typo3-versions: '^12'
+          - php-versions: '8.3'
+            typo3-versions: '^13'
+          - php-versions: '8.4'
+            typo3-versions: '^12'
+          - php-versions: '8.4'
+            typo3-versions: '^13'
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - name: Setup PHP version
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-versions }}
+          extensions: fileinfo gd intl json mbstring mysqli openssl pcre pdo session xml zip zlib
+      - name: Get Composer Cache Directory
+        id: composer-cache
+        run: |
+          echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+      - name: Cache composer dependencies
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
+          restore-keys: ${{ runner.os }}-composer-
+      - name: Install composer dependencies
+        run: |
+          composer require typo3/cms-core=${{ matrix.typo3-versions }} --no-progress --prefer-dist --optimize-autoloader
+      - name: Run PHP linter
+        run: |
+          make lint-php
+      - name: Run PHP unit tests
+        run: |
+          make tests-php-unit
+  code-quality:
+    name: Code Quality
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - name: Setup PHP version
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.1
+          extensions: fileinfo gd intl json mbstring mysqli openssl pcre pdo session xml zip zlib
+      - name: Check composer.json
+        run: |
+          make comp-check
+      - name: Get Composer Cache Directory
+        id: composer-cache
+        run: |
+          echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+      - name: Cache composer dependencies
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
+          restore-keys: ${{ runner.os }}-composer-
+      - name: Install composer dependencies
+        run: |
+          make vendor
+      - name: Check composer.json is normalized
+        run: |
+          make comp-norm
+      - name: Check coding standards
+        run: |
+          make cs-check
+      - name: Run static analysis
+        run: |
+          make stan
+      - name: Run rector
+        run: |
+          make rector-check

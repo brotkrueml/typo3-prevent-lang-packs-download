@@ -1,0 +1,2 @@
+# cat=basic/basic; type=string; label=Extension exclude list
+excludeList =
