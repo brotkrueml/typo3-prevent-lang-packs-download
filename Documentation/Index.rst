@@ -29,8 +29,8 @@ Prevent Language Packs Download
 
 ----
 
-The extension provides the possibility to prevent language packs download for
-configurable extension keys.
+The extension provides the ability to prevent the download of language packs
+for configurable extension keys.
 
 ----
 

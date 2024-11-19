@@ -12,10 +12,10 @@ Target group: **Developers, Integrators**
 Extension configuration
 =======================
 
-Configure the extension keys which provide no language pack on the official
-TYPO3 translation server.
+Configure the extension keys that should be excluded from downloading language
+packs from the official TYPO3 translation server.
 
-Navigate in the backend to :guilabel:`Admin Tools > Settings`, click on
+In the backend, navigate to :guilabel:`Admin Tools > Settings`, click on
 :guilabel:`Configure Extensions` and then on
 :guilabel:`prevent_lang_packs_download`:
 
@@ -24,9 +24,9 @@ Navigate in the backend to :guilabel:`Admin Tools > Settings`, click on
 
    Extension configuration
 
-By default, the exclude list is empty. You can enter one or more extension keys,
-separated by a comma. Additionally, a wildcard at the end can be used to exclude
-extensions starting with a certain string.
+The exclude list is empty by default. You can enter one or more extension keys,
+separated by commas. In addition, you can use a wildcard at the end to exclude
+extensions that begin with a specific extension key.
 
 Some examples:
 
