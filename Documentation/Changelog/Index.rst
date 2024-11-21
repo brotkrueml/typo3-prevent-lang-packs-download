@@ -11,7 +11,7 @@ and this project adheres to `Semantic Versioning <https://semver.org/spec/v2.0.0
 `Unreleased <https://github.com/brotkrueml/typo3-prevent-lang-packs-download/compare/v1.0.0...HEAD>`_
 ---------------------------------------------------------------------------------------------------------
 
-`1.0.0 <https://github.com/brotkrueml/typo3-prevent-lang-packs-download/releases/tag/v1.0.0>`_ - 2024-xx-xx
+`1.0.0 <https://github.com/brotkrueml/typo3-prevent-lang-packs-download/releases/tag/v1.0.0>`_ - 2024-11-21
 ---------------------------------------------------------------------------------------------------------------
 
 Initial release
