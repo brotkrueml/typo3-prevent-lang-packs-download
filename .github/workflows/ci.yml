@@ -104,3 +104,13 @@ jobs:
       - name: Run rector
         run: |
           make rector-check
+      - name: Generate code coverage
+        run: .Build/bin/phpunit --configuration Tests/phpunit.xml.dist --log-junit junit.xml --coverage-clover=coverage.xml
+      - name: Upload code coverage test results
+        uses: codecov/test-results-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+      - name: Upload code coverage data
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
