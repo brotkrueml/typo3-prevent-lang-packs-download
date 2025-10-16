@@ -29,7 +29,7 @@ final class PreventDownloadTest extends TestCase
 
     protected function setup(): void
     {
-        $this->extensionConfigurationStub = $this->createStub(ExtensionConfiguration::class);
+        $this->extensionConfigurationStub = self::createStub(ExtensionConfiguration::class);
 
         // The values are of no interest, as we only work with the keys
         $extensions = [
