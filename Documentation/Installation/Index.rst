@@ -26,4 +26,4 @@ In legacy installations, you can also install the extension from the
 Then continue with the :ref:`configuration <configuration>`.
 
 
-.. _TYPO3 Extension Repository (TER): https://extensions.typo3.org/extension/form_rate_limit
+.. _TYPO3 Extension Repository (TER): https://extensions.typo3.org/extension/prevent_lang_packs_download
