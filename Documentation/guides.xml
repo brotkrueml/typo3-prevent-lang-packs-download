@@ -11,6 +11,7 @@
         project-issues="https://github.com/brotkrueml/typo3-prevent-lang-packs-download/issues"
         edit-on-github-branch="main"
         edit-on-github="brotkrueml/typo3-prevent-lang-packs-download"
+        interlink-shortcode="brotkrueml/typo3-prevent-lang-packs-download"
         typo3-core-preferred="stable"
     />
     <project
