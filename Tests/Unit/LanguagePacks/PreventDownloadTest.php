@@ -58,8 +58,9 @@ final class PreventDownloadTest extends TestCase
     {
         $this->extensionConfigurationStub
             ->method('get')
-            ->with(Extension::KEY, 'excludeList')
-            ->willReturn($excludeList);
+            ->willReturnMap([
+                [Extension::KEY, 'excludeList', $excludeList],
+            ]);
 
         $subject = new PreventDownload($this->extensionConfigurationStub);
 
@@ -94,8 +95,9 @@ final class PreventDownloadTest extends TestCase
     {
         $this->extensionConfigurationStub
             ->method('get')
-            ->with(Extension::KEY, 'excludeList')
-            ->willReturn('belog');
+            ->willReturnMap([
+                [Extension::KEY, 'excludeList', 'belog'],
+            ]);
 
         $subject = new PreventDownload($this->extensionConfigurationStub);
 
@@ -112,8 +114,9 @@ final class PreventDownloadTest extends TestCase
     {
         $this->extensionConfigurationStub
             ->method('get')
-            ->with(Extension::KEY, 'excludeList')
-            ->willReturn('matomo_*');
+            ->willReturnMap([
+                [Extension::KEY, 'excludeList', 'matomo_*'],
+            ]);
 
         $subject = new PreventDownload($this->extensionConfigurationStub);
 
@@ -132,8 +135,9 @@ final class PreventDownloadTest extends TestCase
     {
         $this->extensionConfigurationStub
             ->method('get')
-            ->with(Extension::KEY, 'excludeList')
-            ->willReturn('fluid*, setup, matomo_integration');
+            ->willReturnMap([
+                [Extension::KEY, 'excludeList', 'fluid*, setup, matomo_integration'],
+            ]);
 
         $subject = new PreventDownload($this->extensionConfigurationStub);
 
